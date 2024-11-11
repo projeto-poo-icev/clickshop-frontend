@@ -26,13 +26,20 @@ class GlobalProvider extends Component {
   // Função de login
   async loginUser(cpf) {
     try {
-      const data = await login(cpf);
-      this.setState({
-        user: data,
-        authenticated: true,
-        errorMessage: '',
-      });
-      console.log('Login realizado com sucesso:', data);
+      const response = await login(cpf);
+      if (response.status === 200) {
+        this.setState({
+          user: response.data,
+          authenticated: true,
+          errorMessage: '',
+        });
+        console.log('Login realizado com sucesso:', response.data);
+
+      } else {
+        this.setState({
+          errorMessage: "Usuário não encontrado!"
+        })
+      }
     } catch (error) {
       this.setState({
         errorMessage: 'Erro ao realizar login. Por favor, tente novamente.',
