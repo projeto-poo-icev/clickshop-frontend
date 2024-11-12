@@ -1,5 +1,5 @@
-import  { useState } from 'react';
-
+import { useState } from 'react';
+import createProduct from '../api/createProduct';
 
 const CreateProduct = () => {
   const [description, setDescription] = useState('');
@@ -20,17 +20,32 @@ const CreateProduct = () => {
     setQuantity(e.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (price <= 0 || quantity <= 0) {
+
+    // Validando o valor do preço e transformando em Double antes de enviar
+    const formattedPrice = parseFloat(price.replace(',', '.'));
+
+    if (formattedPrice <= 0 || quantity <= 0) {
       alert('Preço e quantidade devem ser maiores que zero.');
       return;
     }
-    console.log('Produto Criado:', { description, price, quantity });
-    alert(`Produto "${description}" criado com sucesso!`);
-    setDescription('');
-    setPrice('');
-    setQuantity('');
+
+    const productData = {
+      description,
+      price: formattedPrice,
+      quantity
+    };
+
+    try {
+      const response = await createProduct(productData);
+      alert(`Produto "${response.description}" criado com sucesso!`);
+      setDescription('');
+      setPrice('');
+      setQuantity('');
+    } catch (error) {
+      alert('Erro ao criar o produto. Por favor, tente novamente.', error);
+    }
   };
 
   return (

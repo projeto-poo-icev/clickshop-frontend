@@ -1,4 +1,4 @@
-import  { useContext } from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-link" to="/home/createProduct">Criar Produto</Link>
             </li>
@@ -27,12 +27,14 @@ const Navbar = () => {
               <Link className="nav-link" to="/home/outros-menus">Outros Menus</Link>
             </li>
           </ul>
-          <span className="navbar-text me-3">
-            Olá, {user?.name || 'Usuário'}
-          </span>
-          <button className="btn btn-outline-danger" onClick={handleLogout}>
-            Logout
-          </button>
+          <div className="d-flex align-items-center">
+            <span className="navbar-text me-3">
+              Olá, {user?.name || 'Usuário'}
+            </span>
+            <button className="btn btn-danger" onClick={handleLogout}>
+              Sair
+            </button>
+          </div>
         </div>
       </div>
     </nav>

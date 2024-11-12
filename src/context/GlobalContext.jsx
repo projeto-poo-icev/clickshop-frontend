@@ -1,6 +1,7 @@
 
 import { createContext, Component } from 'react';
 import { login } from '../api/login';
+import getPoducts from '../api/getProducts';
 
 
 
@@ -76,7 +77,8 @@ class GlobalProvider extends Component {
   }
 
   // Função para definir a lista de produtos
-  setProductList(products) {
+  async setProductList() {
+    const products = await getPoducts();
     this.setState({ productList: products });
   }
 
