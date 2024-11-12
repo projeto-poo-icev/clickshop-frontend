@@ -1,38 +1,36 @@
 /* eslint-disable react/prop-types */
-import  { useState } from 'react';
+import { useContext } from 'react';
+import { GlobalContext } from '../context/GlobalContext';
 
 const ProductCard = ({ product }) => {
-  const [quantity, setQuantity] = useState(0);
+  const { cart, addToCart, removeFromCart } = useContext(GlobalContext);
 
-  const handleAddToCart = () => {
-    setQuantity(quantity + 1);
-    console.log(`Produto ${product.id} adicionado ao carrinho.`);
-  };
-
-  const handleRemoveFromCart = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-      console.log(`Produto ${product.id} removido do carrinho.`);
-    }
-  };
+  // Encontrar o item no carrinho
+  const cartItem = cart.find(item => item.productId === product.id);
+  const quantityInCart = cartItem ? cartItem.quantity : 0;
 
   return (
-    <div className="card h-100">
-      <div className="card-body">
-        <h5 className="card-title">{product.description}</h5>
-        <p className="card-text">Preço: R$ {product.price.toFixed(2).replace('.', ',')}</p>
-        <p className="card-text">Quantidade disponível: {product.quantity}</p>
-        <div className="d-flex justify-content-between">
-          <button className="btn btn-primary" onClick={handleAddToCart}>
-            Adicionar ao Carrinho
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={handleRemoveFromCart}
-            disabled={quantity === 0}
-          >
-            Remover do Carrinho
-          </button>
+    <div className="card h-100 shadow-sm rounded mb-4">
+      <div className="card-body d-flex flex-column justify-content-between">
+        <h5 className="card-title text-capitalize">{product.description}</h5>
+        <p className="card-text fw-bold">Preço: R$ {product.price.toFixed(2).replace('.', ',')}</p>
+        <p className="card-text">Quantidade no carrinho: <span className="fw-semibold">{quantityInCart}</span></p>
+        <div className="mt-auto">
+          <div className="d-flex justify-content-between">
+            <button
+              className="btn btn-outline-primary flex-grow-1 me-2"
+              onClick={() => addToCart(product.id)}
+            >
+              Adicionar
+            </button>
+            <button
+              className="btn btn-outline-danger flex-grow-1"
+              onClick={() => removeFromCart(product.id)}
+              disabled={quantityInCart === 0}
+            >
+              Remover
+            </button>
+          </div>
         </div>
       </div>
     </div>
