@@ -11,7 +11,7 @@ const Home = () => {
       <Navbar />
       <div className="container mt-4">
         <Routes>
-          <Route path="/home/createProduct" element={<CreateProduct />} />
+          <Route path="createProduct" element={<CreateProduct />} />
           <Route path="outros-menus" element={<div>Conteúdo de Outros Menus</div>} />
           <Route path="/" element={<div>Bem-vindo à ClickShop</div>} />
         </Routes>
