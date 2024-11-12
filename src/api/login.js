@@ -6,6 +6,6 @@ export const login = async (cpf) => {
         console.log(response);
         return response
     } catch (error) {
-        console.error(error)
+        return error.response.data
     }
 }
