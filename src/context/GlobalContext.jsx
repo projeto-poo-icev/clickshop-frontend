@@ -42,7 +42,7 @@ class GlobalProvider extends Component {
       }
     } catch (error) {
       this.setState({
-        errorMessage: 'Erro ao realizar login. Por favor, tente novamente.',
+        errorMessage: error.message,
         authenticated: false,
       });
     }
