@@ -1,7 +1,8 @@
-/* eslint-disable react/prop-types */
+
 import { createContext, Component } from 'react';
 import { login } from '../api/login';
-import { Navigate } from 'react-router-dom';
+
+
 
 // Criando o contexto global
 const GlobalContext = createContext();
@@ -16,7 +17,7 @@ class GlobalProvider extends Component {
       cart: [],             // Carrinho de compras
       errorMessage: '',     // Mensagem de erro (caso exista)
     };
-
+    
     this.loginUser = this.loginUser.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -34,7 +35,7 @@ class GlobalProvider extends Component {
           authenticated: true,
           errorMessage: '',
         });
-        <Navigate to="/home" replace={true}/>
+        
         console.log('Login realizado com sucesso:', response.data);
 
       } else {

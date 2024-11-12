@@ -1,8 +1,8 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
-import Login from './assets/pages/Login'
-import CreateCustomer from './assets/pages/CreateCustomer'
-import Home from './assets/pages/Home'
+import Login from './pages/Login'
+import CreateCustomer from './pages/CreateCustomer'
+import Home from './pages/Home'
 
 function App() {
   return (
